@@ -1,0 +1,25 @@
+version: "3.8"
+   
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - data-volume:/home/kvhhvh/Projects/docker-postgres-data/
+    container_name: dbcontainer
+  web:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.local
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+    container_name: pgadmincontainer  
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+volumes:
+  data-volume:
